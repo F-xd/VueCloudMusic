@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive,watch } from 'vue';
 import { useMusic } from '../stores/music';
 const music = useMusic();
 const isShow = ref(false);
@@ -28,6 +28,10 @@ window.addEventListener('mousemove',e=>{
         isShow.value = false;
     }
 })
+watch(()=>(music), (newVal, oldVal)=>{
+    console.log(newVal, oldVal);
+    document.querySelector('.musicPlayer').style.bottom = '0';
+},{deep:true})
 </script>
 
 <style lang='less' scoped>
